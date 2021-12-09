@@ -12,7 +12,7 @@ module TestFlight
       include Rails::Generators::Migration
       extend ActiveRecord::Generators::Migration
 
-      source_root File.expand_path('../templates', __FILE__)
+      source_root File.expand_path("../templates", __FILE__)
 
       def self.next_migration_number(path)
         ActiveRecord::Generators::Base.next_migration_number(path)
