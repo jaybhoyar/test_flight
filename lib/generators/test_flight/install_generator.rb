@@ -12,7 +12,7 @@ module TestFlight
       include Rails::Generators::Migration
       extend ActiveRecord::Generators::Migration
 
-      source_root File.expand_path('../templates/', __FILE__)
+      source_root File.expand_path('../templates', __FILE__)
 
       def self.next_migration_number(path)
         ActiveRecord::Generators::Base.next_migration_number(path)
@@ -29,11 +29,11 @@ module TestFlight
       private
         def migration_file_exists?(template)
           migration_dir = File.expand_path('db/migrate')
-          self.class.migration_exists?(migration_dir, "migrations/#{template}.rb")
+          self.class.migration_exists?(migration_dir, "#{template}.rb")
         end
 
         def add_create_devices_migration(template)
-          migration_template "migrations/#{template}.rb", "db/migrate/#{template}.rb"
+          migration_template "#{template}.rb", "db/migrate/#{template}.rb"
         end
     end
   end
