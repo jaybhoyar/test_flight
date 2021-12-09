@@ -7,7 +7,7 @@ require 'rails/generators/active_record'
 module TestFlight
   module Generators
 
-    class DeviceTableGenerator < Rails::Generators::Base
+    class InstallGenerator < Rails::Generators::Base
 
       include Rails::Generators::Migration
       extend ActiveRecord::Generators::Migration
