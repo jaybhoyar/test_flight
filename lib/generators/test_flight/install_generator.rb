@@ -19,22 +19,12 @@ module TestFlight
       end
 
       def copy_migration_file
-        if migration_file_exists?('create_devices')
-          puts "Migration create_devices is already present in your app."
-        else 
-          add_create_devices_migration('create_devices')
-        end
+        # if migration_file_exists?('create_devices')
+        #   puts "Migration create_devices is already present in your app."
+        # else 
+        migration_template "create_devices.rb", Rails.root.join("db/migrate/create_devices.rb")
+        # end
       end
-
-      private
-        def migration_file_exists?(template)
-          migration_dir = File.expand_path('db/migrate')
-          self.class.migration_exists?(migration_dir, "#{template}.rb")
-        end
-
-        def add_create_devices_migration(template)
-          migration_template "#{template}.rb", "db/migrate/#{template}.rb"
-        end
     end
   end
 end
