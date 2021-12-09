@@ -12,18 +12,14 @@ module TestFlight
       include Rails::Generators::Migration
       extend ActiveRecord::Generators::Migration
 
-      source_root File.expand_path("../templates", __FILE__)
+      source_root File.expand_path('../../templates', __FILE__)
 
       def self.next_migration_number(path)
         ActiveRecord::Generators::Base.next_migration_number(path)
       end
 
       def copy_migration_file
-        # if migration_file_exists?('create_devices')
-        #   puts "Migration create_devices is already present in your app."
-        # else 
-        migration_template "create_devices.rb", Rails.root.join("db/migrate/create_devices.rb")
-        # end
+        migration_template 'create_devices.rb', Rails.root.join('db/migrate/create_devices.rb')
       end
     end
   end
