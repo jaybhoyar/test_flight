@@ -25,6 +25,15 @@ module TestFlight
           migration_template 'migrations/create_devices.rb', Rails.root.join('db/migrate/create_devices.rb')
         end
       end 
+
+      def copy_model_file
+        if Dir['app/models/*device.rb'].any?
+          puts 'Device model has already been added to your app'
+        else
+          copy_file 'models/device.rb', Rails.root.join('app/models/device.rb')
+        end
+      end 
+
     end
   end
 end
