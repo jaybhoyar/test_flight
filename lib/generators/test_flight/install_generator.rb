@@ -19,8 +19,12 @@ module TestFlight
       end
 
       def copy_migration_file
-        migration_template 'create_devices.rb', Rails.root.join('db/migrate/create_devices.rb')
-      end
+        if Dir['db/migrate/*create_devices.rb'].any?
+          puts 'Migration create_devices has already been copied to your app'
+        else
+          migration_template 'create_devices.rb', Rails.root.join('db/migrate/create_devices.rb')
+        end
+      end 
     end
   end
 end
