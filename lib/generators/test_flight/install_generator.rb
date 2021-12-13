@@ -34,6 +34,11 @@ module TestFlight
         end
       end 
 
+      def copy_device_associations
+        inject_into_file 'app/models/user.rb', %q{
+          has_many :devices, dependent: :destroy
+        }, after: 'belongs_to :organization'
+      end
     end
   end
 end
