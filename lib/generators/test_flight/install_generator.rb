@@ -47,7 +47,7 @@ module TestFlight
 
         inject_into_file(
           route_file,
-          "\n resources :devices, only: [:create, :destroy]",
+          "\n    resources :devices, only: [:create, :destroy]",
           after: 'namespace :v1 do'
         )
       end
