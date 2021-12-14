@@ -35,11 +35,13 @@ module TestFlight
       end
 
       def copy_device_associations
-        inject_into_file(
-          'app/models/user.rb',
-          "\n  has_many :devices, dependent: :destroy",
-          after: 'belongs_to :organization'
-        )
+        unless File.readlines('app/models/user.rb').include?('has_many :devices')
+          inject_into_file(
+            'app/models/user.rb',
+            "\n  has_many :devices, dependent: :destroy",
+            after: 'belongs_to :organization'
+          )
+        end
       end
 
       def copy_device_routes
