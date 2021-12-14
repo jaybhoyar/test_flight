@@ -24,7 +24,7 @@ module TestFlight
         else
           migration_template 'migrations/create_devices.rb', Rails.root.join('db/migrate/create_devices.rb')
         end
-      end 
+      end
 
       def copy_model_file
         if Dir['app/models/*device.rb'].any?
@@ -32,7 +32,7 @@ module TestFlight
         else
           copy_file 'models/device.rb', Rails.root.join('app/models/device.rb')
         end
-      end 
+      end
 
       def copy_device_associations
         inject_into_file(
@@ -47,7 +47,7 @@ module TestFlight
 
         inject_into_file(
           route_file,
-          'resources :devices, only: [:create, :destroy]',
+          "\n resources :devices, only: [:create, :destroy]",
           after: 'namespace :v1 do'
         )
       end
