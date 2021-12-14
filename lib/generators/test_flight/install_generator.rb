@@ -28,7 +28,7 @@ module TestFlight
 
       def copy_model_file
         if Dir['app/models/*device.rb'].any?
-          puts 'Device model has already been added to your app'
+          puts 'Device model has already been copied to your app'
         else
           copy_file 'models/device.rb', Rails.root.join('app/models/device.rb')
         end
@@ -42,18 +42,19 @@ module TestFlight
         )
       end
 
-      # def copy_device_routes
-      #   if Dir['config/routes.rb'].any?
-      #   inject_into_file(
-      #     'config/routes.rb',
-      #     "\n draw 'api/v1/mobile'",
-      #     after: 'belongs_to :organization'
-      #   )
-      # end
+      def copy_device_routes
+        route_file = File.readlines('config/routes.rb').include?("  draw :api\n") ? 'config/routes/api.rb' : 'config/routes.rb'
+
+        inject_into_file(
+          route_file,
+          'resources :devices, only: [:create, :destroy]',
+          after: 'namespace :v1 do'
+        )
+      end
 
       def copy_device_controller
         if Dir['app/controllers/api/v1/*devices_controller.rb'].any?
-          puts 'Device controller has been copied to your app'
+          puts 'Device controller has already been copied to your app'
         else
           copy_file 'controllers/devices_controller.rb', Rails.root.join('app/controllers/api/v1/devices_controller.rb')
         end
