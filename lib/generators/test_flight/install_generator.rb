@@ -41,6 +41,23 @@ module TestFlight
           after: 'belongs_to :organization'
         )
       end
+
+      # def copy_device_routes
+      #   if Dir['config/routes.rb'].any?
+      #   inject_into_file(
+      #     'config/routes.rb',
+      #     "\n draw 'api/v1/mobile'",
+      #     after: 'belongs_to :organization'
+      #   )
+      # end
+
+      def copy_device_controller
+        if Dir['app/controllers/api/v1/*devices_controller.rb'].any?
+          puts 'Device controller has been copied to your app'
+        else
+          copy_file 'controllers/devices_controller.rb', Rails.root.join('app/controllers/api/v1/devices_controller.rb')
+        end
+      end
     end
   end
 end
