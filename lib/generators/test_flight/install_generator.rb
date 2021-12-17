@@ -48,11 +48,11 @@ module TestFlight
         inject_into_file(
           'app/models/concerns/incinerable_concern.rb',
           '"Device": {
-            joins: :user,
-            where: ["users.organization_id = ?", org_id]
+          joins: :user,
+          where: ["users.organization_id = ?", org_id]
           },
           ',
-          before: '"User"'
+          before: '        "User"'
         )
       end
 
