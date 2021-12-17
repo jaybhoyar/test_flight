@@ -50,9 +50,8 @@ module TestFlight
           '"Device": {
           joins: :user,
           where: ["users.organization_id = ?", org_id]
-          },
-          ',
-          before: '        "User"'
+        },',
+          before: '        "User": {'
         )
       end
 
