@@ -44,6 +44,19 @@ module TestFlight
         end
       end
 
+      def add_device_model_incineration
+        inject_into_file(
+          "app/models/concerns/incinerable_concern.rb",
+          '
+          "Device": {
+              joins: :user,
+              where: ["users.organization_id = ?", org_id]
+            },\n
+          ',
+          before: '"User"'
+        )
+      end
+
       def copy_device_routes
         route_file = File.readlines('config/routes.rb').include?("  draw :api\n") ? 'config/routes/api.rb' : 'config/routes.rb'
 
