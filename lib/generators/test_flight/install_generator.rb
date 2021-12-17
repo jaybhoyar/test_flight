@@ -39,7 +39,7 @@ module TestFlight
           inject_into_file(
             'app/models/user.rb',
             "\n  has_many :devices, dependent: :destroy",
-            after: "belongs_to :organization "
+            after: 'belongs_to :organization '
           )
         end
       end
