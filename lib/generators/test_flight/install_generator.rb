@@ -35,11 +35,19 @@ module TestFlight
       end
 
       def add_device_user_association
-        inject_into_file(
-          user_model_file_and_params[0],
-          "\n  has_many :devices, dependent: :destroy",
-          before: user_model_file_and_params[1]
-        )
+        if File.exist?("app/models/organization_user.rb")
+          inject_into_file(
+            "app/models/organization_user.rb",
+            "\n  has_many :devices, dependent: :destroy",
+            before: "has_many :permissions, through: :role"
+          )
+        elsif File.exist?("app/models/user.rb")
+          inject_into_file(
+            "app/models/user.rb",
+            "\n  has_many :devices, dependent: :destroy",
+            before: "belongs_to :organization_role"
+          )
+        end
       end
 
       def add_device_model_incineration
@@ -71,16 +79,6 @@ module TestFlight
           copy_file 'controllers/devices_controller.rb', Rails.root.join('app/controllers/api/v1/devices_controller.rb')
         end
       end
-
-      private
-
-        def user_model_file_and_params
-          if File.exist?("app/models/organization_user.rb")
-            ["app/models/organization_user.rb", "has_many :permissions, through: :role"]
-          elsif File.exist?("app/models/user.rb")
-            ["app/models/organization_user.rb", "belongs_to :organization_role, optional: true"]
-          end
-        end
     end
   end
 end
