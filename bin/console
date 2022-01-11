@@ -11,5 +11,16 @@ require "test_flight"
 # require "pry"
 # Pry.start
 
+payload = {
+  app_name: "neeto_chat",
+  device_platform: "ios",
+  device_token: "w40983u0",
+  alert: "Hi",
+  body: "Don't miss out on this"
+}
+
+client = TestFlight::PushNotification.new(payload).send_notification
+puts client
+
 require "irb"
 IRB.start(__FILE__)

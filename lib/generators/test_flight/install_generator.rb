@@ -38,8 +38,8 @@ module TestFlight
         if File.exist?("app/models/organization_user.rb")
           inject_into_file(
             "app/models/organization_user.rb",
-            "\n  has_many :devices, dependent: :destroy",
-            before: "has_many :permissions, through: :role"
+            "  has_many :devices, dependent: :destroy\n",
+            before: "  has_many :permissions, through: :role"
           )
         elsif File.exist?("app/models/user.rb")
           inject_into_file(
