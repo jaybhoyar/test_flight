@@ -21,7 +21,7 @@ module TestFlight
 
     def post
       response = connection.post(API_URL, @payload)
-      response.body.to_json
+      response.body
     end
   end
 end
