@@ -50,35 +50,43 @@ module TestFlight
         end
       end
 
+      def add_device_routes
+        inject_into_file(
+          client_app_route_file,
+          "\n    resources :devices, only: [:create, :destroy]",
+          after: "namespace :v1 do"
+        )
+      end
+
+      def copy_device_controller
+        if Dir["app/controllers/api/v1/*devices_controller.rb"].any?
+          puts "Device controller has already been copied to your app"
+        else
+          copy_file "controllers/devices_controller.rb", Rails.root.join("app/controllers/api/v1/devices_controller.rb")
+        end
+      end
+
       def add_device_model_incineration
         inject_into_file(
-          'app/models/concerns/incinerable_concern.rb',
+          "app/models/concerns/incinerable_concern.rb",
           '"Device": {
           joins: :user,
           where: ["users.organization_id = ?", org_id]
         },
         ',
-          before: '"User": {'
+          before: '"\nUser": {'
         )
       end
 
-      def copy_device_routes
-        route_file = File.readlines('config/routes.rb').include?("  draw :api\n") ? 'config/routes/api.rb' : 'config/routes.rb'
+      private
 
-        inject_into_file(
-          route_file,
-          "\n    resources :devices, only: [:create, :destroy]",
-          after: 'namespace :v1 do'
-        )
-      end
-
-      def copy_device_controller
-        if Dir['app/controllers/api/v1/*devices_controller.rb'].any?
-          puts 'Device controller has already been copied to your app'
-        else
-          copy_file 'controllers/devices_controller.rb', Rails.root.join('app/controllers/api/v1/devices_controller.rb')
+        def client_app_route_file
+          if File.readlines("config/routes.rb").include?("  NeetoCommons::Routes.draw :api\n")
+            "config/routes/api.rb"
+          else
+            "config/routes.rb"
+          end
         end
-      end
     end
   end
 end

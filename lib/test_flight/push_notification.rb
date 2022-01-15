@@ -7,8 +7,6 @@ module TestFlight
     attr_reader :app_name, :device_platform, :device_token, :alert, :body
 
     def initialize(**params)
-      raise ArgumentError, "Missing app_name or device_token" unless params.include?(:app_name) || params.include?(:device_token)
-
       @app_name = params[:app_name]
       @device_platform = params[:device_platform]
       @device_token = params[:device_token]
