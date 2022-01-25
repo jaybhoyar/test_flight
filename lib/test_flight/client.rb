@@ -2,8 +2,6 @@
 
 module TestFlight
   class Client
-    API_URL = "http://localhost:9030/api/v1/push_notifications"
-
     attr_reader :api_key
 
     def initialize(api_key)
@@ -13,12 +11,14 @@ module TestFlight
     end
 
     def send_notification(params)
+      puts params
       payload = Notification.format(params)
+      puts params
       Request.post(payload)
     end
 
     def connection
-      @connection ||= Faraday.new(API_URL) do |conn|
+      @connection ||= Faraday.new do |conn|
         conn.adapter Faraday.default_adapter
         conn.headers["X-Api-Key"] = api_key if api_key.present?
         conn.request :json
