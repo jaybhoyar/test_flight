@@ -2,7 +2,7 @@
 
 module TestFlight
   class Client
-    API_URL = "http://localhost:9030/api/v1/push_notifications".frezze
+    API_URL = "http://localhost:9030/api/v1/push_notifications"
 
     attr_reader :api_key
 
