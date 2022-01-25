@@ -1,27 +1,15 @@
 # frozen_string_literal: true
 
-require "faraday"
-require "faraday_middleware"
-
 module TestFlight
   class Request
-    API_URL = "https://neeto-notifications-staging.herokuapp.com/api/v1/push_notifications"
+    attr_reader :client
 
-    def initialize(payload)
-      @connection = connection
-      @payload = payload
+    def initialize(client)
+      @client = client
     end
 
-    def connection
-      @connection ||= Faraday.new do |conn|
-        conn.request :json
-        conn.response :json, content_type: "application/json"
-      end
-    end
-
-    def post
-      response = connection.post(API_URL, @payload)
-      response.body
+    def self.post(url, body:, headers: {})
+      client.connection.post(url, body, headers)
     end
   end
 end
