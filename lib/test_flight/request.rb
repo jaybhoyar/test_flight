@@ -8,8 +8,8 @@ module TestFlight
       @client = client
     end
 
-    def post(payload)
-      client.connection.post(API_URL, payload)
+    def post(url, body:, headers: {})
+      client.connection.post(url, body, headers)
     end
   end
 end
