@@ -3,7 +3,7 @@
 module TestFlight
   class Notification < Request
     def send(attributes)
-      post("push_notifications", body: format(attributes)).body
+      post("push_notifications", body: format(attributes))
     end
 
     private
