@@ -2,7 +2,7 @@
 
 module TestFlight
   class Notification < Request
-    def send(**attributes)
+    def send(attributes)
       post("push_notifications", body: format(attributes)).body
     end
 
