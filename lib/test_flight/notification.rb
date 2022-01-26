@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
-require_relative "request"
-
 module TestFlight
-  class Notification
-    def self.format(attributes)
+  class Notification < Request
+    def send(**attributes)
+      post("push_notifications", body: format(attributes)).body
+    end
+
+    private
+
+    def format(attributes)
       {
         notification: {
           alert: attributes[:alert],
