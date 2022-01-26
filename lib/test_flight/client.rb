@@ -10,10 +10,10 @@ module TestFlight
       @api_key = api_key
     end
 
-    def send_notification(params)
-      puts params
-      payload = Notification.format(params)
-      puts params
+    def self.send_notification(attributes)
+      puts attributes
+      payload = Notification.format(attributes)
+      puts attributes
       Request.post(payload)
     end
 
