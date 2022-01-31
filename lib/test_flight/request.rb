@@ -9,6 +9,9 @@ module TestFlight
     end
 
     def post(url, body:, headers: {})
+      puts "8"*100
+      puts url
+      puts "8"*100
       client.connection.post(url, body, headers)
     end
   end
