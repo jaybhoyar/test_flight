@@ -18,13 +18,13 @@ module TestFlight
         ActiveRecord::Generators::Base.next_migration_number(path)
       end
 
-      def copy_migration_file
-        if Dir['db/migrate/*create_devices.rb'].any?
-          puts 'Migration create_devices has already been copied to your app'
-        else
-          migration_template 'migrations/create_devices.rb', Rails.root.join('db/migrate/create_devices.rb')
-        end
-      end
+      # def copy_migration_file
+      #   if Dir['db/migrate/*create_devices.rb'].any?
+      #     puts 'Migration create_devices has already been copied to your app'
+      #   else
+      #     migration_template 'migrations/create_devices.rb', Rails.root.join('db/migrate/create_devices.rb')
+      #   end
+      # end
 
       # def copy_model_file
       #   if Dir['app/models/*device.rb'].any?
