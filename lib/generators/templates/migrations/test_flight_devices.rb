@@ -1,4 +1,4 @@
-class CreateDevices < ActiveRecord::Migration[6.1]
+class TestFlightDevices < ActiveRecord::Migration[6.1]
   def change
     create_table :devices, id: :uuid do |t|
       t.string :device_token, null: false
