@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::Mobile::DevicesController < ApplicationController
+class Api::V1::Mobile::DevicesController < ::ApplicationController
   before_action :load_device!, only: [:destroy]
 
   def create
