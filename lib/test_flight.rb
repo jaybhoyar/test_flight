@@ -1,7 +1,7 @@
-# frozen_string_literal: true
 
 require "faraday"
 require "faraday_middleware"
+require "test_flight/engine"
 require_relative "test_flight/version"
 
 module TestFlight

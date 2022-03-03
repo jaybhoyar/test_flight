@@ -1,12 +1,12 @@
-# frozen_string_literal: true
+source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-source "https://rubygems.org"
-
-# Specify your gem's dependencies in test_flight.gemspec
+# Specify your gem's dependencies in test_flight.gemspec.
 gemspec
 
-gem "rake", "~> 13.0"
+group :development do
+  gem 'sqlite3'
+end
 
-gem 'rails', '~> 6.1.0'
-
-gem 'rubocop', '~> 1.7'
+# To use a debugger
+# gem 'byebug', group: [:development, :test]
