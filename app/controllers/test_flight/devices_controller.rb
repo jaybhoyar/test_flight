@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 module TestFlight
-  class Api::V1::Mobile::DevicesController < ApplicationController
+  class Api::V1::Mobile::DevicesController < Api::V1::BaseController
     before_action :load_device!, only: [:destroy]
 
     def create
-      device = current_user.devices.new(device_params)
+      device = current_user.devices.find_or_initialize_by(device_params)
 
       if device.save
         render status: :ok, json: { notice: "Device has been registered successfully", device: device }
@@ -14,7 +14,7 @@ module TestFlight
     end
 
     def destroy
-      if @device.destroy
+      if @device.nil? || @device.destroy
         render json: { notice: "Device has been removed successfully" }, status: :ok
       else
         render json: { errors: @device.errors.full_messages }, status: :unprocessable_entity
@@ -28,7 +28,7 @@ module TestFlight
       end
 
       def load_device!
-        @device = Device.find_by!(id: params[:id])
+        @device = current_user.devices.find_by(id: params[:id])
       end
   end
 end
