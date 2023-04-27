@@ -1,0 +1,42 @@
+{
+  "for_user_id": "12340001",
+  "direct_message_events": [
+    {
+      "type": "message_create",
+      "id": "12350001",
+      "created_timestamp": "1579168904607",
+      "message_create": {
+        "target": {
+          "recipient_id": "12340001"
+        },
+        "sender_id": "12340004",
+        "message_data": {
+          "text": "Please give support for #NH123",
+          "entities": {
+            "hashtags": [],
+            "symbols": [],
+            "user_mentions": [],
+            "urls": []
+          }
+        }
+      }
+    }
+  ],
+  "users": {
+    "12340001": {
+      "id": "12340001",
+      "created_timestamp": "1574179905343",
+      "name": "BbZwHelp",
+      "screen_name": "bbzwhelp",
+      "description": "BbZindiWebHelp"
+    },
+    "12340004": {
+      "id": "12340004",
+      "created_timestamp": "1501323928116",
+      "name": "Ashik Salman",
+      "screen_name": "hi_ashik",
+      "location": "Cochin, India",
+      "description": "Software Engineer"
+    }
+  }
+}
